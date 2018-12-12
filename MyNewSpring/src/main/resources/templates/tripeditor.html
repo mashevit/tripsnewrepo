@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Theme Made By www.w3schools.com - No Copyright -->
+<title>Bootstrap Theme Company Page</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Montserrat"
+	rel="stylesheet" type="text/css" />
+
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet" type="text/css" />
+<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet" />
+
+
+<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link href="../static/css/FileOne.css" th:href="@{/css/FileOne.css}"
+	rel="stylesheet" />
+<style>
+.form-select-vidconvert {
+	border-radius: 18px;
+}
+
+#pics {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#pics td, #customers th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#pics tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#pics tr:hover {
+	background-color: #ddd;
+}
+
+#pics th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+</style>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar"
+	data-offset="60">
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#myPage">Logo</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#about">ABOUT</a></li>
+					<li><a href="#services">SERVICES</a></li>
+					<li><a href="#portfolio">PORTFOLIO</a></li>
+					<li><a href="#pricing">PRICING</a></li>
+					<li><a href="#contact">CONTACT</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="jumbotron text-center">
+		<h1>AllTrip</h1>
+		<p>Trip Editor</p>
+		<form th:action="@{/selecttrip}" th:object="${selectedTrOption}"
+			class="form-inline" method="post" enctype="multipart/form-data">
+			<div class="input-group">
+				<div class="form-group blu-margin">
+					<select class="form-control" th:name="nameoftrip">
+						<option th:each="user : ${trips}" th:value="${user.idtrip}"
+							th:text="${user.nameCompat()}"
+							th:selected="${session.requestedTrip.idtrip == user.idtrip}"></option>
+					</select>
+				</div>
+
+				<div class="input-group-btn">
+					<button type="submit" class="btn btn-danger">Submit user</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- Container (About Section) -->
+	<div id="about" class="container-fluid">
+		<div class="row">
+
+			<div class="col-sm-4">
+				<h2>Select sight</h2>
+				<br>
+				<h4>In <span th:text="${session.requestedTrip.city.cityName}"></span> of the trip on <span th:text="${session.requestedTrip.tripDate}"></span></h4>
+				<br>
+				<form th:action="@{/selectsight}" th:object="${fooOption}"
+					class="form-inline" method="post" enctype="multipart/form-data">
+					<div>
+
+						<label for="Inputsight">sight</label> <select
+							class="form-control form-select-vidconvert" required
+							th:name="nameofsight">
+
+							<optgroup label="registered sights in trip">
+								<option value="-1">Select sight</option>
+								<option th:each="user : ${session.sights}"
+									th:value="${user.idsightseeings}" th:text="${user}"
+									th:selected="${session.requestedSight.idsightseeings == user.idsightseeings}"></option>
+
+							</optgroup>
+
+							<optgroup label="new sights from city">
+								<option value="-1">Select sight</option>
+								<option th:each="user : ${session.sights2}"
+									th:value="${user.idsightseeings}" th:text="${user}"
+									th:selected="${session.requestedSight.idsightseeings == user.idsightseeings}"></option>
+
+							</optgroup>
+
+						</select>
+
+					</div>
+
+
+					<!--   <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Tutorials
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
+      <li role="presentation" class="dropdown-header">>new sights from city</li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+    </ul>
+  </div> -->
+					<br>
+					<button class="btn btn-default btn-lg" type="submit">select
+						sight</button>
+					<button type="submit" name="action" value="dltsight"
+						class="btn btn-default btn-lg">delete sight from trip</button>
+					<button type="submit" name="action" value="dltsightcity"
+						class="btn btn-default btn-link">delete sight from city
+						also</button>
+				</form>
+			</div>
+
+			<form th:action="@{/addnewsight}" method="post" enctype="multipart/form-data">
+				<div class="col-sm-4">
+					<h2>Add sight</h2>
+					<br>
+					<h4>To the trip to <span th:text="${session.requestedTrip.city.cityName}"></span> on the <span th:text="${session.requestedTrip.tripDate}"></span></h4>
+					<br>
+					<p>
+						<label for="nameofsight">sight</label> <input class="form-control"
+							id="nameofsight" name="nameofsight" placeholder="sight" type="text" required>
+						
+					</p>
+
+					<br>
+					<button class="btn btn-default btn-lg">add sight</button>
+				</div>
+
+				<div class="col-sm-4">
+					<span class="glyphicon glyphicon-signal logo"></span>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="container-fluid bg-grey">
+		<div class="row">
+			<div class="col-sm-4">
+				<span class="glyphicon glyphicon-globe logo slideanim"></span>
+			</div>
+			<div class="col-sm-8">
+				<h2>
+					<input type="hidden" id="sightattr" name="sightattr"
+						value=${session.requestedSight}
+						th:attr="data-my-func-attr=${session.requestedSight}" /> Add
+					pictures to sight - sight name: <b
+						th:text="${session.requestedSight}"></b>
+				</h2>
+				<br>
+				<h4>
+					<strong>Picture</strong> <label for="Inputname"> location
+						Address</label> <input class="form-control" id="sightpic" name="sight"
+						placeholder="pic address" type="text" required>
+					<button class="btn btn-default btn-link" id="add_new">add
+						picture</button>
+					<button class="btn btn-default btn-link" id="list">ListItems</button>
+					<button class="btn btn-default btn-link" id="clear">ClearList</button>
+					<button class="btn btn-default btn-link" id="forsitelist">listpicsforsite</button>
+
+
+				</h4>
+			</div>
+
+		</div>
+
+
+
+
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			/*[+
+
+			var trsiid1  = [[${session.requestedtrSight}]];
+			+]*/
+
+			
+			
+			
+			$("#forsitelist")
+			.click(
+					function() {
+
+						$
+								.ajax({
+									type : "GET",
+									url : "/check1",
+									data : {
+										"id" : trsiid1
+									},
+									success : function(data) {
+										var a = "<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>";
+
+										for (var i = 0; i < data.length; i++) {
+											var tds = '<tr><td>'
+													+ (i + 1)
+													+ '.</td><td> '
+													+ data[i].trs
+													+ "</td><td> "
+													+ data[i].addr
+													+ '</td><td><button class="btn btn-default btn-link" name="a" id="listdel" data-other-attr='
+													+ i
+													+ ' >remove</button></td></tr>';
+
+											a += tds
+										}
+										a += "</table>";
+										$('#tbl').html(a);
+
+									}
+								});
+
+					});
+
+
+			/*]]>*/
+		</script>
+
+
+
+
+
+
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			/*[+
+
+			var trsiid  = [[${session.requestedtrSight}]];
+			+]*/
+
+			$("#list")
+					.click(
+							function() {
+
+								$
+										.ajax({
+											type : "GET",
+											url : "/check",
+											data : {
+												"id" : trsiid
+											},
+											success : function(data) {
+												var a = "<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>";
+
+												for (var i = 0; i < data.length; i++) {
+													var tds = '<tr><td>'
+															+ (i + 1)
+															+ '.</td><td> '
+															+ data[i].trs
+															+ "</td><td> "
+															+ data[i].addr
+															+ '</td><td><button class="btn btn-default btn-link" name="b" id="listdel" data-other-attr='
+															+ i
+															+ ' >remove</button></td></tr>';
+
+													a += tds
+												}
+												a += "</table>";
+												$('#tbl').html(a);
+
+											}
+										});
+
+							});
+			
+			
+			
+			
+			
+			
+			
+
+
+			/*]]>*/
+		</script>
+
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			/*[+
+
+			var user  = [[${session.requestedtrSight}]];
+			+]*/
+
+
+			
+			$("#add_new").click(function() {
+
+				$.ajax({
+					url : '/addpic',
+					type : 'POST',
+					contentType : 'application/json',
+					data : JSON.stringify({
+						addr : $("#sightpic").val(),
+						trs : user
+					}),
+					dataType : 'json'
+				});
+			});
+			
+			
+			
+			
+			$('body').on("click","#listdel" , function()  {
+				var q=$(this).attr('name');
+			var w=$(this).attr('data-other-attr');
+				$.ajax({
+					url : '/removepic',
+					type : 'GET',
+					
+					data : {				
+						"name" : q,
+						"attr" : w
+				},
+				});
+			});
+			/*]]>*/
+		</script>
+
+
+
+
+
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			/*[+
+
+			var user  = [[${session.requestedtrSight}]];
+			+]*/
+
+			$("#clear").click(function() {
+
+				$.ajax({
+					url : '/clearpiclist',
+					type : 'GET',
+					data : {
+						"id" : 1
+					}
+					
+				});
+			});
+			
+			
+			$("#sbmttodb").click(function() {
+
+				$.ajax({
+					url : '/dbsbmt',
+					type : 'GET',
+					data : {
+					
+					}
+					
+				});
+			});
+			
+
+			/*]]>*/
+		</script>
+
+
+
+
+		<div class="row">
+			<div class="col-sm-4">
+
+				<strong>Picture added:</strong>
+			</div>
+			<div class="col-sm-6" id='tbl'></div>
+			<div class="col-sm-2">
+				<button class="btn btn-default btn-info" id="sbmttodb">submit to db</button>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			/*[+
+
+			+]*/
+
+
+			
+			$("#sbmttodb").click(function() {
+
+				$.ajax({
+					url : '/dbsbmt',
+					type : 'GET',
+					data : {
+					
+					}
+					
+				});
+			});
+			
+
+			/*]]>*/
+		</script>
+	<!--
+           <br>
+        <table id="maintable" width="50%" cellpadding="0" cellspacing="0" class="pdzn_tbl1" border="#729111 1px solid">
+            <tr>
+                <th align="center">Roll No</th>
+                <th align="center">First Name</th>
+                <th align="center">Last Name</th>
+            </tr>
+            <tr id="rows">
+                <div style="padding-left: 5px">
+                    <td style="padding:5px;">
+                        <input type="text" name="rollno<? $i ?>" />
+                    </td>
+                    <td style="padding:5px;">
+                        <input type="text" name="firstname<? $i ?>" />
+                    </td>
+                    <td style="padding:5px;">
+                        <input type="text" name="lastname<? $i ?>" />
+                    </td>
+                </div>
+            </tr>
+        </table>
+            <br><div id="add_new">ADD NEW
+</div>
+                  $("#add_new").click(function () {      
+                    var bla = $('#sightpic').val();
+                    function sendData() {
+    $.ajax({
+        url: '/addpic',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            addr:${bla},
+            trs:${sessionScope.requestedSight}
+        }),
+        dataType: 'json'
+    });
+}
+                    var statefulvar = ${sessionScope.stateful};
+                    statefulvar.addItem(bla,${sessionScope.requestedSight})
+                    
+                    $("#add_new").click(function () { 
+
+    $("#maintable").each(function () {
+       
+        var tds = '<tr>';
+        jQuery.each($('tr:last td', this), function () {
+            tds += '<td>' + $(this).html() + '</td>';
+        });
+        tds += '</tr>';
+        if ($('tbody', this).length > 0) {
+            $('tbody', this).append(tds);
+        } else {
+            $(this).append(tds);
+        }
+    });
+});
+                    
+       $("#add_new").click(function () { 
+
+    $("#pics").each(function () {
+       
+        var tds = '<tr>';
+        jQuery.each($('tr:last td', this), function () {
+            tds += '<td>' + $(this).html() + '</td>';
+        });
+        tds += '</tr>';
+        if ($('tbody', this).length > 0) {
+            $('tbody', this).append(tds);
+        } else {
+            $(this).append(tds);
+        }
+    });
+});
+							<%
+									String action = request.getParameter("todo");
+										Stac td = (Stac) session.getAttribute("td");
+										if (td == null) {
+											try {
+												td = new Stac();
+												session.setAttribute("td", td);
+											} catch (Exception ex) {
+												ex.printStackTrace();
+											}
+										}
+										
+										StacInv tdi = (StacInv) session.getAttribute("tdi");
+										if (tdi == null) {
+											try {
+												tdi = new StacInv();
+												session.setAttribute("tdi", tdi);
+											} catch (Exception ex) {
+												ex.printStackTrace();
+											}
+											}
+										if (action != null) {
+											if (action.equals("AddItem")) {
+												String item = request.getParameter("item");
+												if (!item.equals("")) {
+													td.addItem(item, (TripSightseeing) session.getAttribute("worksight"));
+													/* 	out.println("item " + item + " added"); */
+													request.setAttribute("scrollTo", "addpics");
+
+												}
+											} else if (action.equals("ListItems")) {
+												Vector<Map> items = td.listItems();
+												/* 		out.println("items: "); */
+												out.println(
+														"<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>");
+												for (int x = 0; x != items.size(); x++) {
+													String addrspic = (String) items.elementAt(x).get("addr");
+													out.println(
+															"<tr><td>" + (x + 1) + ".</td><td> " + items.elementAt(x).get("trs") + "</td><td> "
+																	+ (addrspic.length() >= 40
+																			? /* "..." + */ addrspic.substring(addrspic.length() - 40)
+																			: addrspic));
+													out.print("</td><td><a href=tripEditor.jsp?todo=remove&itemnum=" + x
+															+ ">remove</a></td></tr>");
+													request.setAttribute("scrollTo", "addpics");
+												}
+												out.print("</table>");
+												request.setAttribute("scrollTo", "addpics");
+
+											} else if ("ClearList".equals(action)) {
+												td.clearItems();
+												out.println("items Cleared");
+												request.setAttribute("scrollTo", "addpics");
+
+											} else if ("todb".equals(action)) {
+												RequestDispatcher rd = request.getRequestDispatcher("/EditorController");
+												//request.setAttribute("td", td);
+												request.setAttribute("action", action);
+												request.setAttribute("td1", td); /*    request.setAttribute("trp", (String)(session.getAttribute("tri")+""));
+																					*/ //session.removeAttribute("todo");
+												rd.forward(request, response);
+											} else if ("remove".equals(action)) {
+												String item = request.getParameter("itemnum");
+												td.removeItem(item);
+												request.setAttribute("scrollTo", "addpics");
+
+											} else if ("listpicsforsite".equals(action)) {
+												
+												
+												Vector<Map> items = tdi.listItems(
+														((TripSightseeing) (session.getAttribute("worksight"))).getIdtripSightseeing());
+												out.println(
+														"<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>");
+												for (int x = 0; x != items.size(); x++) {
+													String addrspic = (String) items.elementAt(x).get("addr");
+													out.println(
+															"<tr><td>" + (x + 1) + ".</td><td> " + items.elementAt(x).get("trs") + "</td><td> "
+																	+ (addrspic.length() >= 40
+																			? /* "..." + */ addrspic.substring(addrspic.length() - 40)
+																			: addrspic));
+													out.print("</td><td><a href=tripEditor.jsp?todo=removeI&itemnum=" + x
+															+ ">remove</a></td></tr>");
+													request.setAttribute("scrollTo", "addpics");
+												}
+												out.print("</table>");
+												request.setAttribute("scrollTo", "addpics");
+											}
+											
+											else if ("removeI".equals(action)) {
+												String item = request.getParameter("itemnum");
+												tdi.removeItem(item);
+												request.setAttribute("scrollTo", "addpics");
+										}
+										}
+								%>
+  -->
+
+	<!-- Container (Services Section) -->
+	<div id="services" class="container-fluid text-center">
+		<h2>SERVICES</h2>
+		<h4>What we offer</h4>
+		<br>
+		<div class="row slideanim">
+			<div class="col-sm-4 ">
+				<div class="thumbnail">
+					<img src="paris.jpg" alt="Paris" width="400" height="300">
+					<p>
+						<strong>Paris</strong>
+					</p>
+					<p>Yes, we built Paris</p>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<span class="glyphicon glyphicon-heart logo-small"></span>
+				<h4>LOVE</h4>
+				<p>Lorem ipsum dolor sit amet..</p>
+			</div>
+			<div class="col-sm-4">
+				<span class="glyphicon glyphicon-lock logo-small"></span>
+				<h4>JOB DONE</h4>
+				<p>Lorem ipsum dolor sit amet..</p>
+			</div>
+		</div>
+		<br> <br>
+		<div class="row slideanim">
+			<div class="col-sm-4">
+				<span class="glyphicon glyphicon-leaf logo-small"></span>
+				<h4>GREEN</h4>
+				<p>Lorem ipsum dolor sit amet..</p>
+			</div>
+			<div class="col-sm-4">
+				<span class="glyphicon glyphicon-certificate logo-small"></span>
+				<h4>CERTIFIED</h4>
+				<p>Lorem ipsum dolor sit amet..</p>
+			</div>
+			<div class="col-sm-4">
+				<span class="glyphicon glyphicon-wrench logo-small"></span>
+				<h4 style="color: #303030;">HARD WORK</h4>
+				<p>Lorem ipsum dolor sit amet..</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Container (Portfolio Section) -->
+	<div id="portfolio" class="container-fluid text-center bg-grey">
+		<h2>Portfolio</h2>
+		<br>
+		<h4>What we have created</h4>
+		<div class="row text-center slideanim">
+			<div class="col-sm-4">
+				<div class="thumbnail">
+					<img src="paris.jpg" alt="Paris" width="400" height="300">
+					<p>
+						<strong>Paris</strong>
+					</p>
+					<p>Yes, we built Paris</p>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="thumbnail">
+					<img src="newyork.jpg" alt="New York" width="400" height="300">
+					<p>
+						<strong>New York</strong>
+					</p>
+					<p>We built New York</p>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="thumbnail">
+					<img src="sanfran.jpg" alt="San Francisco" width="400" height="300">
+					<p>
+						<strong>San Francisco</strong>
+					</p>
+					<p>Yes, San Fran is ours</p>
+				</div>
+			</div>
+		</div>
+		<br>
+
+		<h2>What our customers say</h2>
+		<div id="myCarousel" class="carousel slide text-center"
+			data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<h4>
+						"This company is the best. I am so happy with the result!"<br>
+						<span>Michael Roe, Vice President, Comment Box</span>
+					</h4>
+				</div>
+				<div class="item">
+					<h4>
+						"One word... WOW!!"<br> <span>John Doe, Salesman, Rep
+							Inc</span>
+					</h4>
+				</div>
+				<div class="item">
+					<h4>
+						"Could I... BE any more happy with this company?"<br> <span>Chandler
+							Bing, Actor, FriendsAlot</span>
+					</h4>
+				</div>
+			</div>
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" role="button"
+				data-slide="prev"> <span
+				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a> <a class="right carousel-control" href="#myCarousel" role="button"
+				data-slide="next"> <span
+				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+
+	<!-- Container (Pricing Section) -->
+	<div id="pricing" class="container-fluid">
+		<div class="text-center">
+			<h2>Pricing</h2>
+			<h4>Choose a payment plan that works for you</h4>
+		</div>
+		<div class="row slideanim">
+			<div class="col-sm-4 col-xs-12">
+				<div class="panel panel-default text-center">
+					<div class="panel-heading">
+						<h1>Basic</h1>
+					</div>
+					<div class="panel-body">
+						<p>
+							<strong>20</strong> Lorem
+						</p>
+						<p>
+							<strong>15</strong> Ipsum
+						</p>
+						<p>
+							<strong>5</strong> Dolor
+						</p>
+						<p>
+							<strong>2</strong> Sit
+						</p>
+						<p>
+							<strong>Endless</strong> Amet
+						</p>
+					</div>
+					<div class="panel-footer">
+						<h3>$19</h3>
+						<h4>per month</h4>
+						<button class="btn btn-lg">Sign Up</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4 col-xs-12">
+				<div class="panel panel-default text-center">
+					<div class="panel-heading">
+						<h1>Pro</h1>
+					</div>
+					<div class="panel-body">
+						<p>
+							<strong>50</strong> Lorem
+						</p>
+						<p>
+							<strong>25</strong> Ipsum
+						</p>
+						<p>
+							<strong>10</strong> Dolor
+						</p>
+						<p>
+							<strong>5</strong> Sit
+						</p>
+						<p>
+							<strong>Endless</strong> Amet
+						</p>
+					</div>
+					<div class="panel-footer">
+						<h3>$29</h3>
+						<h4>per month</h4>
+						<button class="btn btn-lg">Sign Up</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4 col-xs-12">
+				<div class="panel panel-default text-center">
+					<div class="panel-heading">
+						<h1>Premium</h1>
+					</div>
+					<div class="panel-body">
+						<p>
+							<strong>100</strong> Lorem
+						</p>
+						<p>
+							<strong>50</strong> Ipsum
+						</p>
+						<p>
+							<strong>25</strong> Dolor
+						</p>
+						<p>
+							<strong>10</strong> Sit
+						</p>
+						<p>
+							<strong>Endless</strong> Amet
+						</p>
+					</div>
+					<div class="panel-footer">
+						<h3>$49</h3>
+						<h4>per month</h4>
+						<button class="btn btn-lg">Sign Up</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Container (Contact Section) -->
+	<div id="contact" class="container-fluid bg-grey">
+		<h2 class="text-center">CONTACT</h2>
+		<div class="row">
+			<div class="col-sm-5">
+				<p>Contact us and we'll get back to you within 24 hours.</p>
+				<p>
+					<span class="glyphicon glyphicon-map-marker"></span> Chicago, US
+				</p>
+				<p>
+					<span class="glyphicon glyphicon-phone"></span> +00 1515151515
+				</p>
+				<p>
+					<span class="glyphicon glyphicon-envelope"></span>
+					myemail@something.com
+				</p>
+			</div>
+			<div class="col-sm-7 slideanim">
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<input class="form-control" id="name" name="name"
+							placeholder="Name" type="text" required>
+					</div>
+					<div class="col-sm-6 form-group">
+						<input class="form-control" id="email" name="email"
+							placeholder="Email" type="email" required>
+					</div>
+				</div>
+				<textarea class="form-control" id="comments" name="comments"
+					placeholder="Comment" rows="5"></textarea>
+				<br>
+				<div class="row">
+					<div class="col-sm-12 form-group">
+						<button class="btn btn-default pull-right" type="submit">Send</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Add Google Maps -->
+	<div id="googleMap" style="height: 400px; width: 100%;"></div>
+	<script>
+		function myMap() {
+			var myCenter = new google.maps.LatLng(41.878114, -87.629798);
+			var mapProp = {
+				center : myCenter,
+				zoom : 12,
+				scrollwheel : false,
+				draggable : false,
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+			};
+			var map = new google.maps.Map(document.getElementById("googleMap"),
+					mapProp);
+			var marker = new google.maps.Marker({
+				position : myCenter
+			});
+			marker.setMap(map);
+		}
+	</script>
+
+
+
+
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwHq23WcDuRdLYKkxKC-fqeGB4LWtlQD8&callback=myMap"></script>
+	<!--
+To use this code on your website, get a free API key from Google.
+Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+-->
+
+	<footer class="container-fluid text-center">
+		<a href="#myPage" title="To Top"> <span
+			class="glyphicon glyphicon-chevron-up"></span>
+		</a>
+		<p>
+			Bootstrap Theme Made By <a href="https://www.w3schools.com"
+				title="Visit w3schools">www.w3schools.com</a>
+		</p>
+	</footer>
+
+	<script>
+		$(document).ready(
+
+				function() {
+					// Add smooth scrolling to all links in navbar + footer link
+					$(".navbar a, footer a[href='#myPage']").on('click',
+							function(event) {
+								// Make sure this.hash has a value before overriding default behavior
+								if (this.hash !== "") {
+									// Prevent default anchor click behavior
+									event.preventDefault();
+
+									// Store hash
+									var hash = this.hash;
+
+									// Using jQuery's animate() method to add smooth page scroll
+									// The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+									$('html, body').animate({
+										scrollTop : $(hash).offset().top
+									}, 900, function() {
+
+										// Add hash (#) to URL when done scrolling (default click behavior)
+										window.location.hash = hash;
+									});
+								} // End if
+							});
+
+					$(window).scroll(function() {
+						$(".slideanim").each(function() {
+							var pos = $(this).offset().top;
+
+							var winTop = $(window).scrollTop();
+							if (pos < winTop + 600) {
+								$(this).addClass("slide");
+							}
+						});
+					});
+				});
+	</script>
+</body>
+</html>

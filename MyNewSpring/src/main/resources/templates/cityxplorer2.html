@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Travel Organizer</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Montserrat"
+	rel="stylesheet" type="text/css" />
+
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet" type="text/css" />
+
+
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" />
+
+<link href="../static/css/FileOne.css" th:href="@{/css/FileOne.css}"
+	rel="stylesheet" />
+<link href="../static/css/rcarousel.css" th:href="@{/css/rcarousel.css}"
+	rel="stylesheet" />
+<style>
+
+/* /* .containerimg {
+    width: 200px;
+    height: 120px;
+} */
+
+/* resize images */
+.containerimg img {
+	width: 100%;
+	height: auto;
+}
+			.container1 {
+				width: 80%;
+				position: relative;
+				margin: 0 auto;
+			}
+		.arrows {
+		top:40%;
+		font-size: 80px;
+		   color: #f4511e;
+		
+				background: none;
+				display: block;
+				position: absolute;
+				z-index: 100;
+			}
+
+			.r {
+				right: 0;
+				
+			}
+.l {
+				left: 0;
+			}
+			
+			.r > span,.l > span {
+				display: none;
+			}
+			
+			.pagesc {
+				width: 150px;
+				margin: 0 auto;
+				min-height:150px;
+			}
+			
+			.bullet {
+			
+				display: block;
+				width: 18px;
+				height: 18px;
+				margin: 0;
+				margin-right: 5px;
+				float: left;				
+			}
+			
+.glyphicon-hand-up {
+    font-size: 23px;
+   color: #f4511e;
+}	
+		.glyphicon-education {
+		    font-size: 23px;
+   color: #f4511e;
+}		
+				.slide {
+				width:80%;
+							margin: 0 auto;
+				position: relative;
+			}		
+.carousel-inner {
+	width: 100%;
+	max-height: 400x !important;
+}
+
+.item {
+	text-align: center;
+}
+
+.carousel-inner img {
+	display: inline-block !important;
+}
+
+.holder {
+	display: inline;
+}
+
+.holder img {
+	max-height: 600px;
+	max-width: 600px;
+	object-fit: cover;
+}
+</style>
+
+
+</head>
+
+
+<body id="myPage" data-spy="scroll" data-target=".navbar"
+	data-offset="60">
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">AllTrip</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#about">ABOUT</a></li>
+					<li><a href="#services">SERVICES</a></li>
+					<li><a href="#portfolio">PORTFOLIO</a></li>
+					<li><a href="#pricing">PRICING</a></li>
+					<li><a href="#contact">CONTACT</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="jumbotron text-center">
+		<h1>Travels</h1>
+		<p>Travel And not Forget</p>
+	</div>
+
+	<!-- Container (About Section) -->
+
+
+	<div id="about" class="container-fluid bg-grey">
+		<div class="row slideanim">
+			<div class="col-sm-4">
+				<span class="glyphicon glyphicon-globe logo"></span>
+			</div>
+			<div class="col-sm-8">
+				<h2>City</h2>
+				<h4>
+					<strong>Name </strong>traveles here
+				</h4>
+				<p>
+					<strong>Traveled </strong>and remembered
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div id="portfolio" class="container-fluid text-center bg-grey">
+					<th:block th:each="content, iterstat : ${imgcontent}">
+			<div class="container1">
+						<h2>
+							Sights <b th:text="${content.sight}"></b> Pictures
+						</h2>
+						<div th:id="'carousel' + ${iterstat.index}" class="slide">
+			
+							<div th:each="picture : ${content.addr}">
+								<img th:src="${picture}" class="img-responsive" />
+							</div>
+						
+						</div>
+							<a href="#" class="glyphicon glyphicon-chevron-right arrows r" role="button"  th:id="'ui-carousel-next' + ${iterstat.index}"><span>next</span></a>
+							<a href="#" class="glyphicon glyphicon-chevron-left arrows l" role="button"  th:id="'ui-carousel-prev' + ${iterstat.index}"><span>prev</span></a>
+							<div th:id="'pages' + ${iterstat.index}" role="button" class="pagesc"></div>
+						<!--  -->
+					<!-- 	<a href="#" th:id="'ui-carousel-next' + ${iterstat.index}" > next</a> -->
+			</div>
+					</th:block>
+
+		<!-- Wrapper for slides -->
+
+
+
+	</div>
+
+
+<!-- 
+
+
+<a class="left carousel-control" href="#"
+					th:id="'ui-carousel-prev' + ${iterstat.index}" role="button"
+					data-slide="prev"> <span
+					class="glyphicon glyphicon-chevron-left" aria-hidden="false"></span>
+					<span class="sr-only">Previous</span>sasasa
+				</a> <a class="right carousel-control" href="#"
+					th:id="'ui-carousel-next' + ${iterstat.index}" role="button"
+					data-slide="next"> <span
+					class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
+					<span class="sr-only">Next</span>dsasas
+				</a>
+
+ -->
+
+
+
+	<!-- 	<script>
+function myMap() {
+var myCenter = new google.maps.LatLng(31.252973, 34.791462);
+var mapProp = {center:myCenter, zoom:14, scrollwheel:false, draggable:false, mapTypeId:google.maps.MapTypeId.ROADMAP};
+var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+var marker = new google.maps.Marker({position:myCenter});
+marker.setMap(map);
+}
+</script>
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwHq23WcDuRdLYKkxKC-fqeGB4LWtlQD8&callback=myMap"></script> -->
+	<footer class="container-fluid text-center">
+		<a href="#myPage" title="To Top"> <span
+			class="glyphicon glyphicon-chevron-up"></span>
+		</a>
+		<p>
+			Bootstrap Theme Made By <a href="https://www.w3schools.com"
+				title="Visit w3schools">www.w3schools.com</a>
+		</p>
+	</footer>
+	<script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+
+	<script src="../static/js/jquery-1.7.1.min.js"></script>
+	<script src="../static/js/jquery.ui.core.min.js"></script>
+	<script src="../static/js/jquery.ui.widget.min.js"></script>
+	<script src="../static/js/jquery.ui.rcarousel.min.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+					// Add smooth scrolling to all links in navbar + footer link
+					$(".navbar a, footer a[href='#myPage']").on('click',
+							function(event) {
+								// Make sure this.hash has a value before overriding default behavior
+								if (this.hash !== "") {
+									// Prevent default anchor click behavior
+									event.preventDefault();
+
+									// Store hash
+									var hash = this.hash;
+
+									// Using jQuery's animate() method to add smooth page scroll
+									// The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+									$('html, body').animate({
+										scrollTop : $(hash).offset().top
+									}, 900, function() {
+
+										// Add hash (#) to URL when done scrolling (default click behavior)
+										window.location.hash = hash;
+									});
+								} // End if
+							});
+
+					$(window).scroll(function() {
+						$(".slideanim").each(function() {
+							var pos = $(this).offset().top;
+
+							var winTop = $(window).scrollTop();
+							if (pos < winTop + 600) {
+								$(this).addClass("slide");
+							}
+						});
+					});
+				})
+	</script>
+	<th:block th:each="ind : ${listints}">
+
+
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			/*[+
+
+				var carou  = "#carousel[[${ind}]]";
+			var forv="ui-carousel-next[[${ind}]]";
+			var prev="ui-carousel-prev[[${ind}]]";
+
+			
+			+]*/
+
+			jQuery(function($) {
+				
+				
+				function generatePages[[${ind}]]() {
+					var _total, i, _link;
+					
+					_total = $( "#carousel[[${ind}]]" ).rcarousel( "getTotalPages" );
+					
+					for ( i = 0; i < _total; i++ ) {
+						_link = $( "<a href='#'></a>" ).css('color', '#f4511e').css('text-decoration', 'none');
+						
+						$(_link)
+							.bind("click", {page: i},
+								function( event ) {
+									$( "#carousel[[${ind}]]" ).rcarousel( "goToPage", event.data.page );
+									event.preventDefault();
+								}
+							)
+							.addClass( "bullet off glyphicon glyphicon-education" )
+							.appendTo( "#pages[[${ind}]]" );
+					}
+					
+					// mark first page as active
+					$( "a:eq(0)", "#pages[[${ind}]]" )
+						.removeClass( "off glyphicon glyphicon-education" )
+						.addClass( "on glyphicon glyphicon-hand-up" )
+					
+
+				}
+
+				function pageLoaded[[${ind}]]( event, data ) {
+					$( "a.on", "#pages[[${ind}]]" )
+						.removeClass( "on glyphicon glyphicon-hand-up" ).addClass( "off glyphicon glyphicon-education" )
+				
+
+					$( "a", "#pages[[${ind}]]" )
+						.eq( data.page ).removeClass( "off glyphicon glyphicon-education" )
+						.addClass( "on glyphicon glyphicon-hand-up" )
+
+				}
+				
+				
+				
+				$("#carousel[[${ind}]]").rcarousel({
+					visible : 1,
+					step : 1,
+					speed : 700,
+					auto : {
+						enabled : true
+					},
+					width : 600,
+					height : 600,
+					margin : 0,
+					start: generatePages[[${ind}]],
+					pageLoaded: pageLoaded[[${ind}]],
+					navigation : {
+						prev : "#ui-carousel-prev[[${ind}]]",
+						next : "#ui-carousel-next[[${ind}]]"
+					}
+				});
+		
+		
+		$( "#ui-carousel-next[[${ind}]]" )
+			.add( "#ui-carousel-prev[[${ind}]]" )
+			.add( ".bullet" )
+			.hover(
+				function() {
+					$( this ).css( "opacity", 0.7 );
+				},
+				function() {
+					$( this ).css( "opacity", 1.0 );
+				}
+			);
+			});
+			
+			/* 
+			$(document).ready(function() {
+			    $("#id-for-that-link").click(function() {
+			    	$( "#carousel[[${ind}]]" ).rcarousel( "next" );
+			    });
+			}); */
+			/*]]>*/
+		</script>
+
+	</th:block>
+
+</body>
+</html>
