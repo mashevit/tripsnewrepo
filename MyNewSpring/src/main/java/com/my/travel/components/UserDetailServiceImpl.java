@@ -1,4 +1,4 @@
-/*package com.my.travel.components;
+package com.my.travel.components;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -25,4 +25,4 @@ public class UserDetailServiceImpl implements UserDetailsService {
         return user;
     }
     
-}*/
+}

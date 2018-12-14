@@ -1,4 +1,4 @@
-/*package com.my.travel.components;
+package com.my.travel.components;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -39,4 +39,4 @@ public class AuthenticationService {
     }
     return null;
   }
-}*/
+}

@@ -37,6 +37,9 @@ import com.my.travel.model2.Trip;
 import com.my.travel.model2.TripSightseeing;
 
 
+
+
+
 @CrossOrigin
 @Controller
 @SessionAttributes({ "requestedTrip", "sights", "sights2", "fooOption", "requestedSight", "stateful",
@@ -73,11 +76,7 @@ import com.my.travel.model2.TripSightseeing;
 		if (!model.containsAttribute("requestedTrip")||!model.containsAttribute("requestedSight")) {
 			Trip tr = getusers().get(0);
 			model.addAttribute("requestedTrip", tr);
-			List<Sightseeing> l1 = getsights(tr.getIdtrip());
-			model.addAttribute("sights", l1);
-			List<Sightseeing> l2 = getsights2(tr);
-			model.addAttribute("sights2", getsightsdiff(getsights2(tr), l1));
-			model.addAttribute("requestedSight", l2.get(0));
+			sightlistinit(model, tr);
 
 		}
 		if (!model.containsAttribute("stateful"))
@@ -89,6 +88,14 @@ import com.my.travel.model2.TripSightseeing;
 			model.addAttribute("fooOption", new Sightseeing());
 		}
 		return "tripeditor";
+	}
+
+	private void sightlistinit(Model model, Trip tr) {
+		List<Sightseeing> l1 = getsights(tr.getIdtrip());
+		model.addAttribute("sights", l1);
+		List<Sightseeing> l2 = getsights2(tr);
+		model.addAttribute("sights2", getsightsdiff(getsights2(tr), l1));
+		model.addAttribute("requestedSight", l2.get(0));
 	}
 
 /*	@RequestMapping(value = "/addcityto")
@@ -110,6 +117,26 @@ import com.my.travel.model2.TripSightseeing;
 
 	}*/
 	
+	
+	@PostMapping("/updatetrip")
+	public String updatetrip(@ModelAttribute("requestedTrip") Trip requestedTrip, Model model) {
+
+/*		Optional<Dish> studentOptional = dishRepository.findById(id);
+
+		if (!studentOptional.isPresent())
+			return ResponseEntity.notFound().build();
+
+		student.setIddish(id);*/
+		
+		tripRepository.save(requestedTrip);
+
+		return "tripeditor";
+	}
+	
+	
+	
+	
+	
 	@PostMapping("/selecttrip")
 	public String select(@RequestParam Trip nameoftrip, Model model) {
 
@@ -122,14 +149,15 @@ import com.my.travel.model2.TripSightseeing;
 	}
 
 	@PostMapping("/selectsight")
-	public String selectsight(@RequestParam Sightseeing nameofsight, Model model,
+	public String selectsight(@RequestParam Sightseeing nameofsight, @RequestParam String action, Model model,
 			@ModelAttribute("requestedTrip") Trip requestedTrip,
 			@ModelAttribute("sights") List<Sightseeing> sightslist) {
 
-		// model.addAttribute("requestedSight", nameofsight);
 		int ind = nameofsight.getIdsightseeings();
 		boolean ans = sightslist.stream().filter(o -> o.getIdsightseeings() == ind).findFirst().isPresent();
-		if (!ans) {
+		
+		// model.addAttribute("requestedSight", nameofsight);
+		if(action.equalsIgnoreCase("slct")){if (!ans) {
 			TripSightseeing tripSightseeing = new TripSightseeing();
 			tripSightseeing.setSightseeing(nameofsight);
 			tripSightseeing.setTrip(requestedTrip);
@@ -146,6 +174,18 @@ import com.my.travel.model2.TripSightseeing;
 		model.addAttribute("requestedSight", nameofsight);
 		model.addAttribute("requestedtrSight", tripSightseeingRepository
 				.findOneByTripAndSightseeing(requestedTrip, nameofsight).getIdtripSightseeing());
+		}else if(action.equalsIgnoreCase("dltsight")) {
+			TripSightseeing todel=tripSightseeingRepository
+					.findOneByTripAndSightseeing(requestedTrip, nameofsight);
+			tripSightseeingRepository.delete(todel);
+			sightlistinit(model, requestedTrip);
+		}else if(action.equalsIgnoreCase("dltsightcity")) {
+				sightseeingRepository.delete(nameofsight);
+				sightlistinit(model, requestedTrip);
+			
+		}
+		
+		
 		return "tripeditor";
 	}
 	
@@ -332,4 +372,31 @@ import com.my.travel.model2.TripSightseeing;
 	 System.out.println(Stateful.imgdetails+"fddfdffd");*/
 	 return "fileone";
 	}	
+	
+	
+	@ModelAttribute("cities")
+	public List<City> getcities() {
+		return cityRepository.findByOrderByIdcitiesDesc();
+	}
+	
+	@ModelAttribute("City1")
+	public City getcityobj() {
+		return new City();
+	}
+	
+	
+	
+	@PostMapping("/delcity")
+	public String delcity(@ModelAttribute("City1") City city, Model model) {
+		System.out.println(city/*.getIdcities()*/);
+	/*	city=cityRepository.findById(city.getIdcities()).get();
+		int a = sightseeingRepository.countByCity(city);
+		System.out.println("count = "+a);
+		if(a==0) {
+		cityRepository.delete(city);
+		getcities();}*/
+		return "tripeditor";
+	}
+	
+	
 }

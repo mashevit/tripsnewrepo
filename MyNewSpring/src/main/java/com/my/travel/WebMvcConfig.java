@@ -1,4 +1,4 @@
-/*package com.my.travel;
+package com.my.travel;
 
 
 
@@ -16,4 +16,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return bCryptPasswordEncoder;
     }
 
-}*/
+}

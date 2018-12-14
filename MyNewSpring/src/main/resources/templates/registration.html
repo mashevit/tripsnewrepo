@@ -9,14 +9,14 @@
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<form th:action="@{/web/login}" method="get">
+	<form th:action="@{/login}" method="get">
 		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
 	</form>	
 	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
-				<form autocomplete="off" action="#" th:action="@{/web/registration}"
+				<form autocomplete="off" action="#" th:action="@{/registration}"
 					th:object="${user1}" method="post" class="form-horizontal"
 					role="form">
 					<h2>Registration Form</h2>

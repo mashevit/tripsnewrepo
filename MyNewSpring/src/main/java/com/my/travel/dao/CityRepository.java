@@ -16,4 +16,8 @@ public interface CityRepository extends JpaRepository<City, Integer> {
      
  	@Query("SELECT a FROM Trip t Join t.city a GROUP BY a ORDER BY COUNT(a) Desc")
  	List<City> commoncities(Pageable pageable);
+ 	
+ 	List<City> findByOrderByIdcitiesDesc();
+ 	
+ 	City findOneByCityName(String name);
 }

@@ -22,6 +22,6 @@ public interface SightseeingRepository extends JpaRepository<Sightseeing, Intege
 	
 	List<Sightseeing> findBycityIdcitiesIn(int id);
 	List<Sightseeing> findBycityIn(City id);
-
+	int countByCity(City c);
 	//List<Sightseeing>  findBycityInAndtripSightseeingsTripNotIn(City id,Trip id1);
 	}

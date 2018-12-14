@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -98,6 +99,16 @@ public class MainController {
 
 	}
 
+
+	@RequestMapping(value = "/savenewtrip", method = RequestMethod.POST)
+	public String savenewtrip(@ModelAttribute("newtrip") Trip tr, Model model, HttpSession session) {
+	System.out.println(tr);
+	tr.setTraveler((Traveler)session.getAttribute("requestedUser"));
+	tripRepository.save(tr);
+		return "fileone";
+		
+	}
+	
 	
 	
 	@RequestMapping(value = "/adduser", method = RequestMethod.POST)
@@ -105,7 +116,7 @@ public class MainController {
 		Traveler newDeveloper = new Traveler();
 		newDeveloper.setTravelerBirthdate(birthdate);
 		newDeveloper.setTravelerName(name);
-
+			
 		travelerRepository.save(newDeveloper);
 		List<Traveler> users = new ArrayList<>();
 		users = listAll();
@@ -172,6 +183,12 @@ public class MainController {
 		return travelerRepository.findAll();
 	}
 
+	@ModelAttribute("newtrip")
+	public Trip newtrip() {
+		return new Trip();
+	}
+	
+	
 	@ModelAttribute("cities")
 	public List<City> getcities() {
 		return cityRepository.findAll();
@@ -192,6 +209,16 @@ public class MainController {
 	  public List<List<Trip>> getfrtr() {
 		  return frontTrips();
 	  }
+	  
+/*	  @ModelAttribute("sampleTrip")
+	  public Trip getsmtr() {
+		  return tripRepository.getOne(1);
+	  }*/
+/*	  @InitBinder
+	  public void initDateBinder(final WebDataBinder binder) {
+	         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true));
+	  }
+	  */
 	 
 	final double neededratio = 1.777777777;
 

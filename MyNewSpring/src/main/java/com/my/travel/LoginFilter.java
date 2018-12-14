@@ -1,4 +1,4 @@
-/*package com.my.travel;
+package com.my.travel;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -49,4 +49,3 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 	  AuthenticationService.addToken(res, auth.getName());
   }
 }
-*/

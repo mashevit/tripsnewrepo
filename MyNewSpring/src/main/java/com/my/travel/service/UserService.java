@@ -1,4 +1,4 @@
-/*package com.my.travel.service;
+package com.my.travel.service;
 
 
 import java.util.Arrays;
@@ -42,4 +42,4 @@ public class UserService {
         userRepository.save(user);
     }
 
-}*/
+}

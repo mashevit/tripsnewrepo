@@ -1,4 +1,4 @@
-/*package com.my.travel;
+package com.my.travel;
 
 import java.util.Arrays;
 
@@ -103,21 +103,21 @@ public class MultiHttpSecurityConfig {
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 
-	        http.antMatcher("/web/**").
+	        http.antMatcher("/**").
 	                authorizeRequests()
-	                .antMatchers("/web").permitAll()
-	                .antMatchers("/web/login").permitAll()
-	                .antMatchers("/web/registration").permitAll()
-	                .antMatchers("/web/admin/**").hasAuthority("ADMIN").anyRequest()
+	                .antMatchers("/").permitAll()
+	                .antMatchers("/login").permitAll()
+	                .antMatchers("/registration").permitAll()
+	                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
 	                .authenticated().and().csrf().disable().formLogin()
-	                .loginPage("/web/login").failureUrl("/web/login?error=true")
-	                .defaultSuccessUrl("/web/admin/home")
+	                .loginPage("/login").failureUrl("/login?error=true")
+	                .defaultSuccessUrl("/admin/home")
 	                .usernameParameter("email")
 	                .passwordParameter("password")
 	                .and().logout()
-	                .logoutRequestMatcher(new AntPathRequestMatcher("/web/logout"))
-	                .logoutSuccessUrl("/web").and().exceptionHandling()
-	                .accessDeniedPage("/web/access-denied");
+	                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+	                .logoutSuccessUrl("/").and().exceptionHandling()
+	                .accessDeniedPage("/access-denied");
 	    }
 
 	    @Override
@@ -127,4 +127,4 @@ public class MultiHttpSecurityConfig {
 	                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
 	    }
   }
-}*/
+}

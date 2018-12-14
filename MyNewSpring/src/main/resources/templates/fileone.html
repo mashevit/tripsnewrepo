@@ -127,7 +127,7 @@
 
 		</div>
 	</div>
-	<form th:action="@{/selectuser}" th:object="${selectedOption}"
+	<form th:action="@{/savenewtrip}" th:object="${newtrip}"
 		class="form-inline" method="post" enctype="multipart/form-data">
 
 		<div id="services" class="container-fluid text-center">
@@ -147,7 +147,7 @@
 					<label for="Inputselect">city</label>
 					<div class="input-group">
 						<div class="form-group blu-margin">
-							<select class="form-control" th:name="nameofcity">
+							<select class="form-control" th:name="nameofcity" th:field="*{City}">
 								<option th:each="user : ${cities}" th:value="${user.idcities}"
 									th:text="${user.cityName}"></option>
 							</select>
@@ -160,14 +160,14 @@
 					<span class="glyphicon glyphicon-glass logo-small"></span>
 					<h4>hotel</h4>
 					<label for="Name2">hotel</label> <input type="text"
-						class="form-control" id="hotel" placeholder="hotel name" />
+						class="form-control" id="hotel" placeholder="hotel name" th:field="*{tripHotel}"/>
 
 				</div>
 				<div class="col-sm-4">
 					<span class="glyphicon glyphicon-euro logo-small"></span>
 					<h4>budget</h4>
 					<label for="Name2">budget</label> <input type="text"
-						class="form-control" id="budget" placeholder="enter money spent" />
+						class="form-control" id="budget" placeholder="enter money spent" th:field="*{tripMoneyspent}"/>
 
 				</div>
 			</div>
@@ -176,23 +176,22 @@
 				<div class="col-sm-4">
 					<span class="glyphicon glyphicon-time logo-small"></span>
 					<h4>date</h4>
-					<label for="Name2">date</label> <input type="text"
-						class="form-control" id="date" placeholder="dd-mm-yyyy" />
+					<label for="Name2">date</label> <input type="date"   
+						class="form-control" id="date" th:placeholder="yyyy-mm-dd" th:field="*{{tripDate}}"/>
 
 				</div>
 				<div class="col-sm-4">
 					<span class="glyphicon glyphicon-calendar logo-small"></span>
 					<h4>duration</h4>
 					<label for="Name2">number of days</label> <input type="text"
-						class="form-control" id="duration" placeholder="number of days" />
+						class="form-control" id="duration" placeholder="number of days" th:field="*{tripNumdays}"/>
 
 				</div>
 				<div class="col-sm-4">
 					<span class="glyphicon glyphicon-road logo-small"></span>
 					<h4>transit time</h4>
 					<label for="Name2">transit time</label> <input type="text"
-						class="form-control" id="transit" placeholder="enter transit time" />
-
+						class="form-control" id="transit" placeholder="enter transit time" th:field="*{tripNummintransit}"/>
 				</div>
 
 			</div>

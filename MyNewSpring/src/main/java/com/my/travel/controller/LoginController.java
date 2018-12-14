@@ -1,4 +1,4 @@
-/*package com.my.travel.controller;
+package com.my.travel.controller;
 
 import javax.validation.Valid;
 
@@ -16,7 +16,7 @@ import com.my.travel.model2.User1;
 import com.my.travel.service.UserService;
 
 @Controller
-@RequestMapping("/web")
+//@RequestMapping("/web")
 public class LoginController {
 
     @Autowired
@@ -75,4 +75,4 @@ public class LoginController {
     }
 
 
-}*/
+}

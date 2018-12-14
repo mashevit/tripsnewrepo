@@ -1,4 +1,4 @@
-/*package com.my.travel;
+package com.my.travel;
 
 import java.io.IOException;
 
@@ -24,4 +24,4 @@ public class AuthenticationFilter extends GenericFilterBean {
     SecurityContextHolder.getContext().setAuthentication(authentication);
     filterChain.doFilter(request, response);
   }
-}*/
+}

@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +26,9 @@ public class Trip implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idtrip;
 
-	@Temporal(TemporalType.DATE)
+/*	@Temporal(TemporalType.DATE)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd") */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="trip_date")
 	private Date tripDate;
 
