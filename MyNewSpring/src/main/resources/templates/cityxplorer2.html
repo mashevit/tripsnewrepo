@@ -236,10 +236,10 @@ marker.setMap(map);
 	<script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
 
-	<script src="../static/js/jquery-1.7.1.min.js"></script>
-	<script src="../static/js/jquery.ui.core.min.js"></script>
-	<script src="../static/js/jquery.ui.widget.min.js"></script>
-	<script src="../static/js/jquery.ui.rcarousel.min.js"></script>
+	<script th:src="@{/js/jquery-1.7.1.min.js}"></script>
+	<script th:src="@{/js/jquery.ui.core.min.js}"></script>
+	<script th:src="@{/js/jquery.ui.widget.min.js}"></script>
+	<script th:src="@{/js/jquery.ui.rcarousel.min.js}"></script>
 	<script>
 		$(document).ready(
 				function() {
@@ -248,7 +248,7 @@ marker.setMap(map);
 							function(event) {
 								// Make sure this.hash has a value before overriding default behavior
 								if (this.hash !== "") {
-									// Prevent default anchor click behavior
+				 //					// Prevent default anchor click behavior
 									event.preventDefault();
 
 									// Store hash
