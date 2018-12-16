@@ -160,7 +160,7 @@ public class MainController {
 	@ModelAttribute("iliaUser")
 	public Traveler getiliaUser() {
 		List<Traveler> tmp=travelerRepository.findBytravelerNameContainingIgnoreCase("Ilia M");
-		if(tmp==null) {Traveler ilia=new Traveler();
+		if(tmp.size()==0) {Traveler ilia=new Traveler();
 				ilia.setTravelerBirthdate(java.util.Date                        // Terrible old legacy class, avoid using. Represents a moment in UTC. 
 						.from(                                // New conversion method added to old classes for converting between legacy classes and modern classes.
 							    LocalDate                         // Represents a date-only value, without time-of-day and without time zone.
