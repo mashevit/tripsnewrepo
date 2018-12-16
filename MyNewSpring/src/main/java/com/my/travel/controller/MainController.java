@@ -193,6 +193,9 @@ public class MainController {
 
 		} else {
 			ans = chkpics(); // picRepository.findFrontPics(PageRequest.of(0, 3/*, Sort.by(...)));
+			
+			if(null == ans) return null;		
+			if(empty) return null;
 			if(ans==null||ans.size()<=3) return null;
 			for (int i = 0; i < 3; i++) {
 				Object a = ans.get(i);
@@ -253,11 +256,11 @@ public class MainController {
 	  */
 	 
 	final double neededratio = 1.777777777;
-
+boolean empty=false;
 	public List<Object> chkpics() {
 		List<Object> ans = new ArrayList<Object>();
 		List<Object[]> tmp = picRepository.findFrontPics(PageRequest.of(0, 6));
-		if (tmp.size()<=5) return null;
+		if (tmp.size()<=5) {empty=true; return null;}
 		City curc = (City) tmp.get(0)[1];
 		Pic q = (Pic) tmp.get(0)[0];
 		int ind = 0;
