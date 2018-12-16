@@ -16,7 +16,7 @@ import com.my.travel.model2.User1;
 import com.my.travel.service.UserService;
 
 @Controller
-//@RequestMapping("/web")
+@RequestMapping("/web")
 public class LoginController {
 
     @Autowired
@@ -70,7 +70,7 @@ public class LoginController {
         User1 user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-        modelAndView.setViewName("fileone");
+        modelAndView.setViewName("redirect:/web/main");
         return modelAndView;
     }
 

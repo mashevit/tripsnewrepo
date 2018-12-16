@@ -80,7 +80,7 @@
 	<div class="jumbotron text-center">
 		<h1>AllTrip</h1>
 		<p>Trip Editor</p>
-		<form th:action="@{/selecttrip}" th:object="${selectedTrOption}"
+		<form th:action="@{/web/selecttrip}" th:object="${selectedTrOption}"
 			class="form-inline" method="post" enctype="multipart/form-data">
 			<div class="input-group">
 				<div class="form-group blu-margin">
@@ -107,7 +107,7 @@
 				<br>
 				<h4>In <span th:text="${session.requestedTrip.city.cityName}"></span> of the trip on <span th:text="${#dates.format(session.requestedTrip.tripDate, 'dd-MM-yyyy')}"></span></h4>
 				<br>
-				<form th:action="@{/selectsight}" th:object="${fooOption}"
+				<form th:action="@{/web/selectsight}" th:object="${fooOption}"
 					class="form-inline" method="post" enctype="multipart/form-data">
 					<div>
 
@@ -158,7 +158,7 @@
 				</form>
 			</div>
 
-			<form th:action="@{/addnewsight}" method="post" enctype="multipart/form-data">
+			<form th:action="@{/web/addnewsight}" method="post" enctype="multipart/form-data">
 				<div class="col-sm-4">
 					<h2>Add sight</h2>
 					<br>
@@ -232,7 +232,7 @@
 						$
 								.ajax({
 									type : "GET",
-									url : "/check1",
+									url : "/web/check1",
 									data : {
 										"id" : trsiid1
 									},
@@ -284,7 +284,7 @@
 								$
 										.ajax({
 											type : "GET",
-											url : "/check",
+											url : "/web/check",
 											data : {
 												"id" : trsiid
 											},
@@ -336,7 +336,7 @@
 			$("#add_new").click(function() {
 
 				$.ajax({
-					url : '/addpic',
+					url : '/web/addpic',
 					type : 'POST',
 					contentType : 'application/json',
 					data : JSON.stringify({
@@ -354,7 +354,7 @@
 				var q=$(this).attr('name');
 			var w=$(this).attr('data-other-attr');
 				$.ajax({
-					url : '/removepic',
+					url : '/web/removepic',
 					type : 'GET',
 					
 					data : {				
@@ -381,7 +381,7 @@
 			$("#clear").click(function() {
 
 				$.ajax({
-					url : '/clearpiclist',
+					url : '/web/clearpiclist',
 					type : 'GET',
 					data : {
 						"id" : 1
@@ -394,7 +394,7 @@
 			$("#sbmttodb").click(function() {
 
 				$.ajax({
-					url : '/dbsbmt',
+					url : '/web/dbsbmt',
 					type : 'GET',
 					data : {
 					
@@ -436,7 +436,7 @@
 			$("#sbmttodb").click(function() {
 
 				$.ajax({
-					url : '/dbsbmt',
+					url : '/web/dbsbmt',
 					type : 'GET',
 					data : {
 					
@@ -452,7 +452,7 @@
 
 	<!-- Container (Services Section) -->
 	
-		<form th:action="@{/delcity}" 
+		<form th:action="@{/web/delcity}" 
 		class="form-inline" method="post" enctype="multipart/form-data" th:object="${City1}">
 		<div id="services" class="container-fluid text-center">
 			<h2>SERVICES</h2>
@@ -512,7 +512,7 @@
 
 
 
-	<form th:action="@{/updatetrip}" th:object="${requestedTrip}"
+	<form th:action="@{/web/updatetrip}" th:object="${requestedTrip}"
 		class="form-inline" method="Post" enctype="multipart/form-data">
 
 		<div id="services1" class="container-fluid text-center ">

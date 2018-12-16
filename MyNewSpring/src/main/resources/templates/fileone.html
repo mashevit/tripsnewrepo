@@ -9,15 +9,12 @@
 
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css" />
-<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
-	rel="stylesheet" />
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" />
 
 <link href="../static/css/FileOne.css" th:href="@{/css/FileOne.css}"
 	rel="stylesheet" />
-<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-
-<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
 </head>
 
 
@@ -48,7 +45,7 @@
 		<h1>Travels</h1>
 		<p>Travel And not Forget</p>
 		<!-- th:object="${selectedOption}" -->
-		<form th:action="@{/selectuser}" th:object="${selectedOption}"
+		<form th:action="@{/web/selectuser}" th:object="${selectedOption}"
 			class="form-inline" method="post" enctype="multipart/form-data">
 			<div class="input-group">
 				<div class="form-group blu-margin">
@@ -77,7 +74,7 @@
 			</div>
 			<div class="col-sm-4">
 
-				<form th:action="@{/removeuser}" method="post"
+				<form th:action="@{/web/removeuser}" method="post"
 					enctype="multipart/form-data">
 					<label for="newcity"><span
 						th:if="${iliaUser.idtraveler == session.requestedUser.idtraveler}">can't
@@ -110,7 +107,7 @@
 					<strong>Chosen trip</strong> Randomly from best
 				</p>
 			</div>
-			<form th:action="@{/addcity}" method="post"
+			<form th:action="@{/web/addcity}" method="post"
 				enctype="multipart/form-data">
 				<div class="col-sm-4">
 					<label for="newcity">new city</label> <input type="text" class="form-control" id="newcity"
@@ -127,7 +124,7 @@
 
 		</div>
 	</div>
-	<form th:action="@{/savenewtrip}" th:object="${newtrip}"
+	<form th:action="@{/web/savenewtrip}" th:object="${newtrip}"
 		class="form-inline" method="post" enctype="multipart/form-data">
 
 		<div id="services" class="container-fluid text-center">
@@ -314,9 +311,9 @@
 					</div>
 					<div class="panel-body">
 						<script>var coun=0;</script>
-						<th:block th:each="content, iterstat : ${frtr[0]}">
+						<th:block th:each="content : ${frtr[0]}">
 							<p>
-								<strong th:text="${content.tripDate}">date</strong> for <span
+								<strong th:text="${#dates.format(content.tripDate, 'dd-MMM-yyyy')}">date</strong> for <span
 									th:text="${content.tripNumdays}"></span> days
 							</p>
 						</th:block>
@@ -346,9 +343,9 @@
 						</h1>
 					</div>
 					<div class="panel-body">
-						<th:block th:each="content, iterstat : ${frtr[1]}">
+						<th:block th:each="content : ${frtr[1]}">
 							<p>
-								<strong th:text="${content.tripDate}">date</strong> for <span
+								<strong th:text="${#dates.format(content.tripDate, 'dd-MMM-yyyy')}">date</strong> for <span
 									th:text="${content.tripNumdays}"></span> days
 
 							</p>
@@ -385,9 +382,9 @@
 						</h1>
 					</div>
 					<div class="panel-body">
-						<th:block th:each="content, iterstat : ${frtr[2]}">
+						<th:block th:each="content : ${frtr[2]}">
 							<p>
-								<strong th:text="${content.tripDate}">date</strong> for <span
+								<strong th:text="${#dates.format(content.tripDate, 'dd-MMM-yyyy')}">date</strong> for <span
 									th:text="${content.tripNumdays}"></span> days
 							</p>
 						</th:block>
@@ -430,7 +427,7 @@
 				</p>
 			</div>
 			<div class="col-sm-7">
-				<form th:action="@{/adduser}" method="post"
+				<form th:action="@{/web/adduser}" method="post"
 					enctype="multipart/form-data">
 					<div class="row slideanim">
 						<div class="col-sm-6 form-group">
@@ -492,6 +489,8 @@
 		</p>
 	</footer>
 
+	<script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
 
 
 	<script>			

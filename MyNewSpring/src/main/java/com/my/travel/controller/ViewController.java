@@ -11,20 +11,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.my.travel.components.ToAndApp;
 import com.my.travel.dao.CityRepository;
 import com.my.travel.dao.PicRepository;
 import com.my.travel.dao.TripSightseeingRepository;
 import com.my.travel.model2.Pic;
-import com.my.travel.model2.Traveler;
 import com.my.travel.model2.TripSightseeing;
 
 
 @Controller
-@RequestMapping(value = "tripcity")
+@RequestMapping(value = "/web/tripcity")
 @SessionAttributes({ "imgcontent"} )
+
 public class ViewController {
 	
 	
