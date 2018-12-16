@@ -256,6 +256,7 @@ public class MainController {
 	public List<Object> chkpics() {
 		List<Object> ans = new ArrayList<Object>();
 		List<Object[]> tmp = picRepository.findFrontPics(PageRequest.of(0, 6));
+		if (tmp.size()<=5) return null;
 		City curc = (City) tmp.get(0)[1];
 		Pic q = (Pic) tmp.get(0)[0];
 		int ind = 0;
