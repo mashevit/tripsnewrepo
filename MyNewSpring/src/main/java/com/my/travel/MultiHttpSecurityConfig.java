@@ -99,7 +99,15 @@ public class MultiHttpSecurityConfig {
 	                .dataSource(dataSource)
 	                .passwordEncoder(bCryptPasswordEncoder);
 	    }
-
+	    
+	    
+	    @Override
+	    protected void configure(HttpSecurity httpSecurity) throws Exception {
+	        httpSecurity.antMatcher("/**").csrf().disable().cors().and()
+			  .authorizeRequests().antMatchers("/").permitAll();}
+	        
+	        
+	   /*     
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 
@@ -118,7 +126,7 @@ public class MultiHttpSecurityConfig {
 	                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 	                .logoutSuccessUrl("/web").and().exceptionHandling()
 	                .accessDeniedPage("/access-denied");
-	    }
+	    }*/
 
 	    @Override
 	    public void configure(WebSecurity web) throws Exception {
