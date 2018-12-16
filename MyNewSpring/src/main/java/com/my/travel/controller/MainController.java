@@ -193,6 +193,7 @@ public class MainController {
 
 		} else {
 			ans = chkpics(); // picRepository.findFrontPics(PageRequest.of(0, 3/*, Sort.by(...)));
+			if(ans.size()<=3) return null;
 			for (int i = 0; i < 3; i++) {
 				Object a = ans.get(i);
 				Pic p = (Pic) ((Object[]) a)[0];
