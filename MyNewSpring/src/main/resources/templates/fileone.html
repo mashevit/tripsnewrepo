@@ -200,7 +200,7 @@
 		</div>
 	</form>
 
-<div th:if="${!frontp.empty and !frtr.empty and !utrips.empty}">
+<div th:if="${not #lists.isEmpty(frontp) and not #lists.isEmpty(frtr) and not #lists.isEmpty(utrips)}">
 	<div id="portfolio" class="container-fluid text-center bg-grey"
 		th:if="${#lists.size(frontp)>=3}">
 		<h2>Portfolio</h2>
