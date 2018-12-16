@@ -232,16 +232,22 @@ public class MainController {
 	
 	  @ModelAttribute("frontcities") 
 	  public List<City> getfrontcities() {
+			if(empty) return null;
+
 		  return comcity();
 	  }
 			  	
 	  @ModelAttribute("utrips")
 	  public List<Trip> getutrips() {
+			if(empty) return null;
+
 		  return utrips();
 	  }
 	  
 	  @ModelAttribute("frtr")
 	  public List<List<Trip>> getfrtr() {
+			if(empty) return null;
+
 		  return frontTrips();
 	  }
 	  
