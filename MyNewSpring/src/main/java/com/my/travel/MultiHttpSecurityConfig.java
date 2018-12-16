@@ -106,7 +106,7 @@ public class MultiHttpSecurityConfig {
 	        httpSecurity.antMatcher("/**").csrf().disable().cors().and()
 			  .authorizeRequests().antMatchers("/").permitAll();}
 	        
-	        
+	        //
 	   /*     
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {

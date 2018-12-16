@@ -3,6 +3,8 @@ package com.my.travel.controller;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,6 +159,19 @@ public class MainController {
 
 	@ModelAttribute("iliaUser")
 	public Traveler getiliaUser() {
+		List<Traveler> tmp=travelerRepository.findBytravelerNameContainingIgnoreCase("Ilia M");
+		if(tmp==null) {Traveler ilia=new Traveler();
+				ilia.setTravelerBirthdate(java.util.Date                        // Terrible old legacy class, avoid using. Represents a moment in UTC. 
+						.from(                                // New conversion method added to old classes for converting between legacy classes and modern classes.
+							    LocalDate                         // Represents a date-only value, without time-of-day and without time zone.
+							    .of( 1986 , 1 , 8 )              // Specify year-month-day. Notice sane counting, unlike legacy classes: 2014 means year 2014, 1-12 for Jan-Dec.
+							    .atStartOfDay(                    // Let java.time determine first moment of the day. May *not* start at 00:00:00 because of anomalies such as Daylight Saving Time (DST).
+							        ZoneId.of( "Asia/Jerusalem" )   // Specify time zone as `Continent/Region`, never the 3-4 letter pseudo-zones like `PST`, `EST`, or `IST`. 
+							    )                                 // Returns a `ZonedDateTime`.
+							    .toInstant()                      // Adjust from zone to UTC. Returns a `Instant` object, always in UTC by definition.
+							))   ; 
+				ilia.setTravelerName("Ilia Mashevitzky");
+				travelerRepository.save(ilia);}
 		return travelerRepository.findBytravelerNameContainingIgnoreCase("Ilia M").get(0);
 	}
 
