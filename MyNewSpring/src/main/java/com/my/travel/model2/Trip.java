@@ -17,9 +17,10 @@ import java.util.List;
  * The persistent class for the trip database table.
  * 
  */
-@Entity
+@Entity(name = "TRIP")
 @NamedQuery(name="TRIP.findAll", query="SELECT t FROM TRIP t")
 @Table(name = "TRIP")
+
 public class Trip implements Serializable {
 	private static final long serialVersionUID = 1L;
 
