@@ -105,7 +105,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/process-init")
 	public ModelAndView processPerson(/* @ModelAttribute Person person */) {
-
+		empty=false;
 		System.out.println("asasdsad21212");
 
 		ModelAndView modelAndView = new ModelAndView();
