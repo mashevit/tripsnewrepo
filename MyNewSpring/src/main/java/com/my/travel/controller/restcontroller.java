@@ -34,8 +34,7 @@ import com.my.travel.service.GetTableNames;
 @RestController
 @RequestMapping(value = "/rest")
 public class restcontroller {
-    private static final String URL = "jdbc:mysql://mytrips81.coizdbobchof.us-east-1.rds.amazonaws.com:3306/travel1?useLegacyDatetimeCode=false&serverTimezone=Asia/Jerusalem&useSSL=false\r\n" + 
-    		"";
+    private static final String URL = "jdbc:mysql://mytrips81.coizdbobchof.us-east-1.rds.amazonaws.com:3306/travel1?useLegacyDatetimeCode=false&serverTimezone=Asia/Jerusalem&useSSL=false" ;
     private static final String USERNAME = "ilia";
     private static final String PASSWORD = "rds8811b";
 
