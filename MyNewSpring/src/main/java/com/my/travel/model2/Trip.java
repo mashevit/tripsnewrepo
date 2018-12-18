@@ -25,6 +25,7 @@ public class Trip implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="IDTRIP")
 	private int idtrip;
 
 /*	@Temporal(TemporalType.DATE)
