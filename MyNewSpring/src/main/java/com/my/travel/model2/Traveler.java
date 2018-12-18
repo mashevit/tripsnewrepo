@@ -13,11 +13,13 @@ import java.util.concurrent.TimeUnit;
  */
 @Entity
 @NamedQuery(name="Traveler.findAll", query="SELECT t FROM Traveler t")
+@Table(name = "TRAVELER")//
 public class Traveler implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@Column(name="IDTRAVELER")//
 	private int idtraveler;
 
 	@Temporal(TemporalType.DATE)
