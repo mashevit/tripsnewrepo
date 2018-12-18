@@ -129,28 +129,31 @@ public class restcontroller {
         try (Connection connection =
         		DriverManager.getConnection(URL,USERNAME,PASSWORD);)        {
 
-            DatabaseMetaData metadata = connection.getMetaData();
-            ResultSet resultSet =
-                metadata.getColumns(null, null, "Trip", null);
 
-            while (resultSet.next()) {
-                String name = resultSet.getString("COLUMN_NAME");
-                String type = resultSet.getString("TYPE_NAME");
-                int size = resultSet.getInt("COLUMN_SIZE");
-                String tmp="Column name: [" + name + "]; " +
-                        "type: [" + type + "]; size: [" + size + "]";
-                ans.add(tmp);
-                System.out.println("Column name: [" + name + "]; " +
-                    "type: [" + type + "]; size: [" + size + "]");
-            }
-            
-            
             DatabaseMetaData md = connection.getMetaData();
             ResultSet rs = md.getTables(null, null, "%", null);
             while (rs.next()) {
-            	ans.add("       ");
-            	ans.add(rs.getString(3));
-              System.out.println(rs.getString(3));
+            		String tbl=rs.getString(3);
+            	ans.add(tbl);
+            	
+            	
+                DatabaseMetaData metadata = connection.getMetaData();
+                ResultSet resultSet =
+                    metadata.getColumns(null, null, tbl, null);
+
+                while (resultSet.next()) {
+                    String name = resultSet.getString("COLUMN_NAME");
+                    String type = resultSet.getString("TYPE_NAME");
+                    int size = resultSet.getInt("COLUMN_SIZE");
+                    String tmp="Column name: [" + name + "]; " +
+                            "type: [" + type + "]; size: [" + size + "]";
+                    ans.add(tmp);
+                  /*  System.out.println("Column name: [" + name + "]; " +
+                        "type: [" + type + "]; size: [" + size + "]");*/
+                }
+                
+            	ans.add("       "); 
+           //   System.out.println(rs.getString(3));
             }
         } catch (SQLException e) {
             e.printStackTrace();
