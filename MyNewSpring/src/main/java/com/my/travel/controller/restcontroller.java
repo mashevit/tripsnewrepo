@@ -271,7 +271,7 @@ public class restcontroller {
             
             
             java.sql.Statement st = conn.createStatement();
-            st.executeUpdate("INSERT INTO travel1.trip SELECT * FROM travel1.TRIP");
+            st.executeUpdate("INSERT INTO travel1."+to+" SELECT * FROM travel1."+from);
             st.close();
 
             
