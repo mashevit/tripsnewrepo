@@ -259,7 +259,35 @@ public class restcontroller {
 	}
 
 	
-	
+	@GetMapping("/tbll12/{from}/{to}")
+	public List<String> getAllStudents122(@PathVariable String from,@PathVariable String to) {
+		List<String> students = new ArrayList<String>();
+        try {
+        	
+        	Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            java.sql.Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery( "INSERT INTO travel1.trip SELECT * FROM travel1.TRIP");
+            while( resultSet.next() ) {
+               // Student student = new Student();
+            //	String Student="  ";
+                students.add( "1 = "+(String) resultSet.getObject( 1 ).toString() );
+                
+                students.add("2 = "+ (String) resultSet.getObject( 2).toString() );
+                students.add( "3 = "+(String) resultSet.getObject(3 ).toString() );
+
+               // student.setFirstName( resultSet.getString( "f_name" ) );
+               // student.setLastName( resultSet.getString( "l_name" ) );
+                
+              //  students.add(student);
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+        	System.out.println(e.getMessage());
+        }
+        return students;
+	}	
 	
 
 	/*
