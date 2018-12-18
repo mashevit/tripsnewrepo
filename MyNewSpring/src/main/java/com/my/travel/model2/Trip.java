@@ -18,7 +18,7 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Trip.findAll", query="SELECT t FROM Trip t")
+@NamedQuery(name="TRIP.findAll", query="SELECT t FROM TRIP t")
 @Table(name = "TRIP")
 public class Trip implements Serializable {
 	private static final long serialVersionUID = 1L;

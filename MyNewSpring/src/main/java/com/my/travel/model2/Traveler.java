@@ -19,7 +19,7 @@ public class Traveler implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-//	@Column(name="IDTRAVELER")//
+	@Column(name="IDTRAVELER")//
 	private int idtraveler;
 
 	@Temporal(TemporalType.DATE)
