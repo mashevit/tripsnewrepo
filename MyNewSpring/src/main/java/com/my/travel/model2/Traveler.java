@@ -11,16 +11,15 @@ import java.util.concurrent.TimeUnit;
  * The persistent class for the traveler database table.
  * 
  */
-@Entity(name = "TRAVELER")
-//@NamedQuery(name="TRIP.findAll", query="SELECT t FROM TRIP t")
-@NamedQuery(name="TRAVELER.findAll", query="SELECT t FROM TRAVELER t")
-@Table(name = "TRAVELER")//
+@Entity
+@NamedQuery(name="Traveler.findAll", query="SELECT t FROM Traveler t")
+@Table(name = "Traveler")//
 public class Traveler implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="IDTRAVELER")//
+//	@Column(name="IDTRAVELER")//
 	private int idtraveler;
 
 	@Temporal(TemporalType.DATE)

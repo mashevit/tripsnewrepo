@@ -14,7 +14,7 @@ import com.my.travel.model2.Trip;
 public interface CityRepository extends JpaRepository<City, Integer> {
      City findByTripsIn(Trip id);
      
- 	@Query("SELECT a FROM TRIP t Join t.city a GROUP BY a ORDER BY COUNT(a) Desc")
+ 	@Query("SELECT a FROM Trip t Join t.city a GROUP BY a ORDER BY COUNT(a) Desc")
  	List<City> commoncities(Pageable pageable);
  	
  	List<City> findByOrderByIdcitiesDesc();

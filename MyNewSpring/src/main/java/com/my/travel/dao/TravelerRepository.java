@@ -10,9 +10,9 @@ import com.my.travel.model2.Traveler;
 
 
 @Repository
-public interface TravelerRepository extends JpaRepository<TRAVELER, Integer> {
+public interface TravelerRepository extends JpaRepository<Traveler, Integer> {
 	   
-	@Query("select u.travelerName from TRAVELER u")
+	@Query("select u.travelerName from Traveler u")
 	   List<String> getAllNames();
 	
     List<Traveler> findBytravelerNameContainingIgnoreCase(String name);
