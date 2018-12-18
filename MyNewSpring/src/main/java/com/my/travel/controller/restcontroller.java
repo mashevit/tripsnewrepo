@@ -110,11 +110,11 @@ public class restcontroller {
 	
 	
 	@GetMapping("/tststst11")
-	public String getres() throws SQLException{
+	public List<String> getres() throws SQLException{
 		
 		
 		
-		
+		List<String> ans=new ArrayList<String>();
 	   	try{
     	    Class.forName("com.mysql.jdbc.Driver");
     	} catch (ClassNotFoundException ex){
@@ -137,7 +137,9 @@ public class restcontroller {
                 String name = resultSet.getString("COLUMN_NAME");
                 String type = resultSet.getString("TYPE_NAME");
                 int size = resultSet.getInt("COLUMN_SIZE");
-
+                String tmp="Column name: [" + name + "]; " +
+                        "type: [" + type + "]; size: [" + size + "]";
+                ans.add(tmp);
                 System.out.println("Column name: [" + name + "]; " +
                     "type: [" + type + "]; size: [" + size + "]");
             }
@@ -146,12 +148,14 @@ public class restcontroller {
             DatabaseMetaData md = connection.getMetaData();
             ResultSet rs = md.getTables(null, null, "%", null);
             while (rs.next()) {
+            	ans.add("       ");
+            	ans.add(rs.getString(3));
               System.out.println(rs.getString(3));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-		return "wwwewe";
+		return ans;
 	}
 	
 /*	
