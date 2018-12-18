@@ -16,7 +16,7 @@ public interface PicRepository extends JpaRepository<Pic, Integer> {
 	List<Pic> findAllBytripSightseeingIdtripSightseeingIn(int id);
 	Pic findOneBypicsAddrAndTripSightseeing(String a,TripSightseeing b);
 	//Pageable topTen = PageRequest.of(firstResult, maxResults, Sort.by(...))
-	@Query("SELECT a ,d FROM Pic a Join a.tripSightseeing b Join b.Trip c Join c.city d GROUP BY d ORDER BY COUNT(d) Desc ")
+	@Query("SELECT a ,d FROM Pic a Join a.tripSightseeing b Join b.trip c Join c.city d GROUP BY d ORDER BY COUNT(d) Desc ")
 	List<Object[]> findFrontPics(Pageable pageable);
 	
 	
