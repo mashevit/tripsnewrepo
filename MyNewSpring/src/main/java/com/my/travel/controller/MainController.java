@@ -196,7 +196,7 @@ public class MainController {
 			
 			if(null == ans) return null;		
 			if(empty) return null;
-			if(ans==null||ans.size()<=3) return null;
+			if(ans==null||ans.size()<3) return null;
 			for (int i = 0; i < 3; i++) {
 				Object a = ans.get(i);
 				Pic p = (Pic) ((Object[]) a)[0];
