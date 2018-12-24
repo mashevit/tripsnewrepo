@@ -16,4 +16,7 @@ public interface TripSightseeingRepository  extends JpaRepository<TripSightseein
   TripSightseeing findOneByidtripSightseeing(int id);
   
   List<TripSightseeing> findAllByTripCityIdcities(int id);
+  
+  
+  List<TripSightseeing> findAllByTripIdtrip(int id);
 }

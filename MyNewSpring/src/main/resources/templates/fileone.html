@@ -70,7 +70,8 @@
 				<h2>About This Site</h2>
 				<h4>Here are my Travels</h4>
 				<p>And More Should Come</p>
-				<button class="btn btn-default btn-lg">Edit a Trip</button>
+				<a th:href="@{'/web/edittrip'}"><button class="btn btn-default btn-lg">Edit a Trip</button>
+				</a>
 			</div>
 			<div class="col-sm-4">
 
@@ -213,7 +214,8 @@
 							height="300">
 					</div>
 					<p>
-						<strong th:text="${frontp[0][1].cityName}"></strong>
+						<a th:href="@{'/web/tripcity/' + ${frontp[0][1].idcities}}"><strong th:text="${frontp[0][1].cityName}"></strong>
+					</a>
 					</p>
 					<p>
 						Yes, we built <span th:text="${frontp[0][1].cityName}"></span>
@@ -228,7 +230,7 @@
 							height="300">
 						<div>
 							<p>
-								<strong th:text="${frontp[1][1].cityName}">New York</strong>
+								<a th:href="@{'/web/tripcity/' + ${frontp[1][1].idcities}}"><strong th:text="${frontp[1][1].cityName}">New York</strong></a>
 							</p>
 							<p>
 								We built <span th:text="${frontp[1][1].cityName}"></span>
@@ -243,7 +245,7 @@
 					<img th:src="${frontp[2][0].picsAddr}" alt="San Francisco"
 						width="400" height="300">
 					<p>
-						<strong th:text="${frontp[2][1].cityName}">San Francisco</strong>
+						<a th:href="@{'/web/tripcity/' + ${frontp[2][1].idcities}}"><strong th:text="${frontp[2][1].cityName}">San Francisco</strong></a>
 					</p>
 					<p>
 						Yes, <span th:text="${frontp[2][1].cityName}"></span> is ours
@@ -265,20 +267,20 @@
 			<div class="carousel-inner" role="listbox">
 				<div class="item active">
 					<h4>
-						<span th:text="${utrips[0]}"></span><br>to <span
-							style="font-style: normal;" th:text="${utrips[0].city}"></span>
+						<span th:text="${utrips[0]}"></span><br>to <a th:href="@{'/web/tripcity/' + ${utrips[0].city.idcities}}"><span
+							style="font-style: normal;" th:text="${utrips[0].city}"></span></a>
 					</h4>
 				</div>
 				<div class="item">
 					<h4>
-						<span th:text="${utrips[1]}"></span><br>to <span
-							style="font-style: normal;" th:text="${utrips[1].city}"></span>
+						<span th:text="${utrips[1]}"></span><br>to <a th:href="@{'/web/tripcity/' + ${utrips[1].city.idcities}}"><span
+							style="font-style: normal;" th:text="${utrips[1].city}"></span></a>
 					</h4>
 				</div>
 				<div class="item">
 					<h4>
-						<span th:text="${utrips[2]}"></span> <br>to <span
-							style="font-style: normal;" th:text="${utrips[2].city}"></span>
+						<span th:text="${utrips[2]}"></span> <br>to <a th:href="@{'/web/tripcity/' + ${utrips[2].city.idcities}}"><span
+							style="font-style: normal;" th:text="${utrips[2].city}"></span></a>
 					</h4>
 				</div>
 			</div>
@@ -321,7 +323,7 @@
 					<div class="panel-footer">
 						<h3 id="cou0">num</h3>
 						<h4>days total</h4>
-						<button class="btn btn-lg">explore</button>
+					<a th:href="@{'/web/tripcity/' + ${frontcities[0].idcities}}">	<button class="btn btn-lg">explore</button></a>
 					</div>
 				</div>
 							<script type="text/javascript" th:inline="javascript">
@@ -357,7 +359,7 @@
 					<div class="panel-footer">
 						<h3 id="cou1">num</h3>
 						<h4>days total</h4>
-						<button class="btn btn-lg">explore</button>
+						<a th:href="@{'/web/tripcity/' + ${frontcities[1].idcities}}"><button class="btn btn-lg">explore</button></a>
 					</div>
 				</div>
 
@@ -392,7 +394,7 @@
 					<div class="panel-footer">
 						<h3 id="cou2">num</h3>
 						<h4>days total</h4>
-						<button class="btn btn-lg">explore</button>
+						<a th:href="@{'/web/tripcity/' + ${frontcities[2].idcities}}"><button class="btn btn-lg">explore</button></a>
 					</div>
 				</div>
 				

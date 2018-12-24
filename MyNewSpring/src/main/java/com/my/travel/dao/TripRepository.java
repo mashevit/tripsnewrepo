@@ -19,7 +19,7 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
 	
 	List<Trip> findByCityIn(City city);
 
-	
+	List<Trip> findByCityIdcitiesIn(int city);
 	@Query("SELECT t FROM Trip t GROUP BY t.city ORDER BY COUNT(t.city) Asc")
 	List<Trip> uniqueTrips(Pageable pageable);
 

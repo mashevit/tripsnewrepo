@@ -5,18 +5,16 @@
 <!-- Theme Made By www.w3schools.com - No Copyright -->
 <title>Bootstrap Theme Company Page</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="https://fonts.googleapis.com/css?family=Montserrat"
 	rel="stylesheet" type="text/css" />
 
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css" />
-<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
-	rel="stylesheet" />
 
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" />
 
-<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <link href="../static/css/FileOne.css" th:href="@{/css/FileOne.css}"
 	rel="stylesheet" />
 <style>
@@ -51,6 +49,9 @@
 	color: white;
 }
 </style>
+
+<script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar"
 	data-offset="60">
@@ -640,6 +641,8 @@ Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 		</p>
 	</footer>
 
+	<script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
 	<script>
 		$(document).ready(
 
